@@ -1,666 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d1c">
-
-  <title>Azim Ahmed Rafi | Web Developer Portfolio</title>
-  <meta name="description" content="Official portfolio of Azim Ahmed Rafi. Explore web development skills, projects and contact information.">
-  <meta name="author" content="Azim Ahmed Rafi">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #080d1c;
-      --card: #111a30;
-      --text: #f5f7ff;
-      --muted: #aab5ca;
-      --accent: #39d5ff;
-      --purple: #9874ff;
-      --border: rgba(255,255,255,.12);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      transition: .3s;
-    }
-
-    body.light {
-      --bg: #f3f6ff;
-      --card: #fff;
-      --text: #152039;
-      --muted: #58657c;
-      --border: rgba(0,0,0,.12);
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, input { font: inherit; }
-
-    .container { width: min(1120px, 90%); margin: auto; }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(8,13,28,.92);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    body.light .navbar { background: rgba(255,255,255,.94); }
-
-    .nav-inner {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .logo { font-size: 21px; font-weight: 800; color: var(--accent); }
-
-    .nav-links { display: flex; align-items: center; gap: 17px; }
-
-    .nav-links a { font-size: 13px; color: var(--muted); }
-    .nav-links a:hover { color: var(--accent); }
-
-    .nav-actions { display: flex; gap: 7px; }
-
-    .small-btn, .menu-btn {
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      padding: 8px 10px;
-      border-radius: 9px;
-      cursor: pointer;
-    }
-
-    .menu-btn { display: none; }
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 110px 0 60px;
-      background:
-        linear-gradient(90deg, rgba(5,10,25,.95), rgba(5,10,25,.70)),
-        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2000&q=85")
-        center/cover no-repeat;
-    }
-
-    .hero-content { max-width: 720px; animation: appear .9s ease both; }
-
-    .tag {
-      display: inline-block;
-      padding: 7px 15px;
-      border: 1px solid rgba(57,213,255,.4);
-      border-radius: 30px;
-      color: var(--accent);
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(36px, 7vw, 65px);
-      line-height: 1.2;
-      margin-bottom: 15px;
-    }
-
-    .gradient {
-      background: linear-gradient(90deg, var(--accent), var(--purple));
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-    }
-
-    .hero p { color: #d0d8e8; max-width: 600px; margin: 15px 0 25px; }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #25c9f5, #8067ff);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      margin: 5px 5px 5px 0;
-      transition: .25s;
-    }
-
-    .btn:hover { transform: translateY(-3px); }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-    }
-
-    section { padding: 85px 0; scroll-margin-top: 70px; }
-
-    .section-title { text-align: center; margin-bottom: 38px; }
-    .section-title h2 { font-size: clamp(27px, 5vw, 38px); margin-bottom: 8px; }
-    .section-title p, .muted { color: var(--muted); }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      padding: 24px;
-      transition: .25s;
-    }
-
-    .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-    .card h3 { margin-bottom: 10px; }
-    .card p { color: var(--muted); font-size: 14px; }
-    .center { text-align: center; }
-
-    .profile {
-      width: 145px;
-      height: 145px;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #25c9f5, #8067ff);
-      border: 5px solid var(--card);
-      font-size: 42px;
-      font-weight: 800;
-      color: white;
-    }
-
-    .skill { margin: 15px 0; }
-
-    .skill-top {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 7px;
-      font-size: 14px;
-    }
-
-    .track {
-      height: 9px;
-      background: rgba(130,145,170,.2);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--purple));
-      border-radius: 20px;
-    }
-
-    .project-search {
-      width: 100%;
-      max-width: 500px;
-      display: block;
-      margin: 0 auto 25px;
-      padding: 13px 16px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      outline: none;
-    }
-
-    .project-icon { font-size: 38px; margin-bottom: 10px; }
-    .price { font-size: 23px; font-weight: 800; color: var(--accent); margin: 12px 0; }
-
-    .review-note {
-      text-align: center;
-      color: var(--muted);
-      padding: 25px;
-      border: 1px dashed var(--border);
-      border-radius: 14px;
-    }
-
-    .contact-box { max-width: 700px; margin: auto; text-align: center; }
-    .contact-box p { color: var(--muted); margin: 12px 0 20px; }
-
-    footer {
-      text-align: center;
-      padding: 28px 10px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .floating-whatsapp {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 900;
-      background: #20c66a;
-      color: white;
-      padding: 13px 17px;
-      border-radius: 50px;
-      box-shadow: 0 5px 20px #0005;
-      font-weight: 700;
-    }
-
-    #topBtn {
-      position: fixed;
-      right: 22px;
-      bottom: 85px;
-      display: none;
-      border: none;
-      border-radius: 50%;
-      padding: 12px 15px;
-      background: var(--purple);
-      color: white;
-      cursor: pointer;
-      z-index: 900;
-    }
-
-    .counter { color: var(--accent); font-size: 30px; font-weight: 800; }
-    .hidden { display: none !important; }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media(max-width: 850px) {
-      .menu-btn { display: block; }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        padding: 20px;
-        background: var(--card);
-        flex-direction: column;
-        align-items: flex-start;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .nav-links.show { display: flex; }
-    }
-
-    @media(max-width: 480px) {
-      .logo { font-size: 17px; }
-      .small-btn { padding: 7px 9px; font-size: 12px; }
-      section { padding: 65px 0; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR RAFI | Personal Website</title>
+<style>
+:root{
+  --bg:#07111f;--panel:#101e30;--text:#f4f8ff;
+  --muted:#a9bad0;--cyan:#00e5ff;--purple:#9b5cff;
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{
+  position:sticky;top:0;z-index:20;
+  background:#081525ed;border-bottom:1px solid #26364b;
+  padding:13px 16px
+}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-size:22px;font-weight:900;color:var(--cyan);white-space:nowrap}
+nav{
+  display:flex;gap:19px;overflow-x:auto;white-space:nowrap;
+  padding:13px 0 5px;scrollbar-width:thin
+}
+nav a{
+  color:#dce8f7;text-decoration:none;font-size:14px;
+  font-weight:800;letter-spacing:.2px;padding:7px 10px;
+  border-radius:8px;transition:.2s
+}
+nav a:hover{color:#07111f;background:#00e5ff}
+nav a.active{color:#07111f;background:#b9f4ff}
+nav a:nth-child(1).active{background:#00e5ff}
+nav a:nth-child(2).active{background:#b68aff}
+nav a:nth-child(3).active{background:#ffca68}
+nav a:nth-child(4).active{background:#70e6a1}
+nav a:nth-child(5).active{background:#ff8baf}
+nav a:nth-child(6).active{background:#9dd6ff}
+nav a:nth-child(7).active{background:#ffe17a}
+nav a:nth-child(8).active{background:#c5a7ff}
+nav a:nth-child(9).active{background:#ff9b70}
+button{
+  border:0;border-radius:10px;padding:11px 15px;color:white;
+  background:linear-gradient(100deg,#087caa,#7541c8);
+  font-weight:bold;cursor:pointer
+}
+section{padding:55px 17px;max-width:1050px;margin:auto}
+h1,h2{margin-top:0}
+h2{color:var(--cyan);text-align:center}
+p{color:var(--muted);line-height:1.7}
+.hero{
+  min-height:390px;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  background:radial-gradient(circle at 50% 20%,#173b60,#07111f 65%);
+  padding:45px 18px
+}
+.hero h1{font-size:clamp(36px,8vw,65px);margin:10px}
+.gradient{
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;color:transparent
+}
+.card{background:var(--panel);border:1px solid #263b55;border-radius:17px;padding:22px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.gallery-box{
+  min-height:140px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#173b60,#40245e);font-size:35px
+}
+input,textarea{
+  width:100%;padding:13px;margin:8px 0;border:1px solid #38506b;
+  border-radius:9px;background:#081525;color:white
+}
+footer{text-align:center;padding:25px;color:var(--muted)}
+.small{font-size:13px;color:var(--muted)}
+.game-info{display:flex;justify-content:space-around;gap:10px;flex-wrap:wrap;margin:15px 0}
+.game-info div{background:#14263b;padding:12px 17px;border-radius:10px;text-align:center}
+.game-info strong{color:var(--cyan);display:block}
+#snakeCanvas{
+  display:block;width:min(100%,420px);height:auto;
+  margin:12px auto;border:3px solid #50d9ff;
+  border-radius:12px;background:#102a37;touch-action:none
+}
+.direction-pad{
+  width:190px;margin:18px auto;display:grid;
+  grid-template-columns:repeat(3,1fr);gap:8px;
+  justify-items:center;align-items:center
+}
+.direction-pad button{width:54px;height:48px;padding:0;font-size:22px}
+.direction-pad .empty{visibility:hidden}
+#gameMessage{text-align:center;font-weight:bold;color:white;min-height:24px}
+.calculator{
+  max-width:340px;margin:auto;padding:20px;
+  background:linear-gradient(145deg,#dff6ff,#fff);
+  border-radius:20px;box-shadow:0 8px 25px #0003;color:#142238
+}
+#calcDisplay{
+  width:100%;height:65px;margin-bottom:14px;background:#f6fcff;
+  color:#142238;border:2px solid #b8e7fa;border-radius:12px;
+  text-align:right;font-size:25px;padding:12px
+}
+.calc-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.calc-buttons button{
+  min-height:53px;font-size:18px;background:#d9f1ff;color:#17364e;
+  border:1px solid #b6e4fa;border-radius:12px
+}
+.calc-buttons button.operator{background:#b9e8ff}
+.calc-buttons button.equal{background:#168fd0;color:white}
+.calc-buttons button.clear{background:#ffdfdf;color:#8d1515}
+.contact-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:20px}
+.contact-link{
+  display:flex;align-items:center;gap:10px;color:white;text-decoration:none;
+  padding:13px 18px;border-radius:13px;font-weight:bold
+}
+.whatsapp{background:#168b4b}.telegram{background:#168bc7}
+.contact-link svg{width:25px;height:25px;fill:white}
+body.light{--bg:#edf4fb;--panel:#fff;--text:#142238;--muted:#53677e}
+body.light header{background:#ffffffed}
+body.light nav a{color:#142238}
+body.light input,body.light textarea{background:white;color:#142238}
+@media(max-width:600px){
+  header{padding:11px}.logo{font-size:18px}
+  nav{gap:12px}nav a{font-size:13px}
+  section{padding:40px 14px}
+}
+</style>
 </head>
-
 <body>
 
-<header class="navbar">
-  <div class="container nav-inner">
-    <a class="logo" href="#home">MR RAFI.</a>
-
-    <nav class="nav-links" id="navLinks">
-      <a href="#home" data-en="Home" data-bn="হোম">Home</a>
-      <a href="#about" data-en="About" data-bn="আমার সম্পর্কে">About</a>
-      <a href="#skills" data-en="Skills" data-bn="দক্ষতা">Skills</a>
-      <a href="#projects" data-en="Projects" data-bn="প্রজেক্ট">Projects</a>
-      <a href="#services" data-en="Services" data-bn="সার্ভিস">Services</a>
-      <a href="#reviews" data-en="Reviews" data-bn="রিভিউ">Reviews</a>
-      <a href="#contact" data-en="Contact" data-bn="যোগাযোগ">Contact</a>
-    </nav>
-
-    <div class="nav-actions">
-      <button class="small-btn" id="langBtn">বাংলা</button>
-      <button class="small-btn" id="themeBtn">☀️</button>
-      <button class="menu-btn" id="menuBtn">☰</button>
-    </div>
+<header>
+  <div class="top">
+    <div class="logo">MR RAFI.</div>
+    <button onclick="toggleTheme()">☀️ / 🌙</button>
   </div>
+  <nav id="mainNav">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#games">Games</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#projects">Projects</a>
+    <a href="#products">Products</a>
+    <a href="#videos">Videos</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#contact">Contact Me</a>
+  </nav>
 </header>
 
 <main>
-  <section class="hero" id="home">
-    <div class="container hero-content">
-      <span class="tag" data-en="Welcome to my portfolio" data-bn="আমার পোর্টফোলিওতে স্বাগতম">Welcome to my portfolio</span>
+<section class="hero" id="home">
+  <p>WELCOME TO MY PERSONAL WEBSITE</p>
+  <h1>I'm <span class="gradient">MR RAFI</span></h1>
+  <h3>Welcome to my digital world</h3>
+  <p>Learning • Creativity • Technology</p>
+  <a href="#about"><button>Explore More</button></a>
+</section>
 
-      <h1>
-        <span data-en="Hello, I'm" data-bn="হ্যালো, আমি">Hello, I'm</span>
-        <br><span class="gradient">Azim Ahmed Rafi</span>
-      </h1>
+<section id="about">
+  <h2>About Me</h2>
+  <div class="card">
+    <h3>Azim Ahmed Rafi</h3>
+    <p>Welcome to my personal website. I am interested in technology,
+    web development, online work and learning new things.</p>
+    <p>My goal is to learn, create and improve every day.</p>
+  </div>
+</section>
 
-      <h3 class="gradient" data-en="Web Development Student" data-bn="ওয়েব ডেভেলপমেন্ট শিক্ষার্থী">Web Development Student</h3>
-
-      <p data-en="I am learning to create modern, responsive and user-friendly websites. Explore my skills and projects."
-         data-bn="আমি আধুনিক, সুন্দর এবং মোবাইল-উপযোগী ওয়েবসাইট তৈরি করা শিখছি। আমার দক্ষতা ও প্রজেক্ট দেখুন।">
-        I am learning to create modern, responsive and user-friendly websites. Explore my skills and projects.
-      </p>
-
-      <a href="#projects" class="btn" data-en="Explore Projects" data-bn="প্রজেক্ট দেখুন">Explore Projects</a>
-      <a href="#contact" class="btn btn-outline" data-en="Contact Me" data-bn="যোগাযোগ করুন">Contact Me</a>
-      <button class="btn btn-outline" onclick="downloadCV()" data-en="Download CV" data-bn="সিভি ডাউনলোড">Download CV</button>
+<section id="games">
+  <h2>🐍 Snake Game</h2>
+  <div class="card">
+    <p style="text-align:center">চারকোনা মাঠে সাপ চালিয়ে খাবারের বল খাও। ১০টি বল খেলে তুমি জিতবে!</p>
+    <div class="game-info">
+      <div>খেয়েছে<strong id="snakeScore">0 / 10</strong></div>
+      <div>অবস্থা<strong id="snakeStatus">Ready</strong></div>
     </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-en="About Me" data-bn="আমার সম্পর্কে">About Me</h2>
-        <p data-en="A little introduction" data-bn="আমার সংক্ষিপ্ত পরিচয়">A little introduction</p>
-      </div>
-
-      <div class="card center">
-        <div class="profile">AR</div>
-        <h3>Azim Ahmed Rafi</h3>
-        <p data-en="I am a student interested in web development and online work. I am continuously learning HTML, CSS and JavaScript."
-           data-bn="আমি ওয়েব ডেভেলপমেন্ট ও অনলাইন কাজের প্রতি আগ্রহী একজন শিক্ষার্থী। HTML, CSS এবং JavaScript শিখছি।">
-          I am a student interested in web development and online work. I am continuously learning HTML, CSS and JavaScript.
-        </p>
-        <br><p>📍 Bangladesh</p>
-      </div>
+    <canvas id="snakeCanvas" width="420" height="420"></canvas>
+    <div id="gameMessage">START চাপ দিয়ে খেলা শুরু করো</div>
+    <div style="text-align:center">
+      <button onclick="startSnake()">START / RESTART</button>
     </div>
-  </section>
-
-  <section id="skills">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-en="My Skills" data-bn="আমার দক্ষতা">My Skills</h2>
-        <p data-en="Skills I am currently learning" data-bn="যেসব দক্ষতা শিখছি">Skills I am currently learning</p>
-      </div>
-
-      <div class="card">
-        <div class="skill">
-          <div class="skill-top"><span>HTML</span><span>Learning</span></div>
-          <div class="track"><div class="fill" style="width:55%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-top"><span>CSS</span><span>Learning</span></div>
-          <div class="track"><div class="fill" style="width:40%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-top"><span>JavaScript</span><span>Learning</span></div>
-          <div class="track"><div class="fill" style="width:25%"></div></div>
-        </div>
-      </div>
+    <div class="direction-pad">
+      <span class="empty"></span>
+      <button onclick="changeDirection('up')">⬆️</button>
+      <span class="empty"></span>
+      <button onclick="changeDirection('left')">⬅️</button>
+      <button onclick="changeDirection('down')">⬇️</button>
+      <button onclick="changeDirection('right')">➡️</button>
     </div>
-  </section>
+    <p class="small" style="text-align:center">
+      চারটি বোতাম দিয়ে সাপ চালাও। খাবারের বল খেলে সাপ বড় হবে।
+      ১০টি বল খেলে তুমি জিতবে। দেয়ালে বা নিজের গায়ে লাগলে খেলা শেষ।
+    </p>
+  </div>
+</section>
 
-  <section id="projects">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-en="My Projects" data-bn="আমার প্রজেক্ট">My Projects</h2>
-        <p data-en="Some sample projects" data-bn="কিছু নমুনা প্রজেক্ট">Some sample projects</p>
-      </div>
+<section id="gallery">
+  <h2>My Gallery</h2>
+  <div class="grid">
+    <div class="gallery-box">🌄</div>
+    <div class="gallery-box">🌌</div>
+    <div class="gallery-box">✨</div>
+  </div>
+</section>
 
-      <input class="project-search" id="projectSearch" type="search"
-             placeholder="Search projects..." aria-label="Search projects">
+<section id="projects">
+  <h2>My Projects</h2>
+  <div class="grid">
+    <div class="card"><h3>🌐 Personal Website</h3><p>My personal web project.</p></div>
+    <div class="card"><h3>🧮 Calculator</h3><p>A simple calculator project.</p></div>
+    <div class="card"><h3>🐍 Snake Game</h3><p>A square snake game.</p></div>
+  </div>
+</section>
 
-      <div class="grid" id="projectGrid">
-        <article class="card project-card" data-search="portfolio website">
-          <div class="project-icon">🌐</div>
-          <h3>Personal Portfolio</h3>
-          <p>A personal website design to introduce myself and show my work.</p>
-        </article>
+<section id="products">
+  <h2>Products</h2>
+  <div class="card">
+    <h3>My Products</h3>
+    <p>My products and services will be displayed here.</p>
+  </div>
+</section>
 
-        <article class="card project-card" data-search="calculator javascript">
-          <div class="project-icon">🧮</div>
-          <h3>Calculator</h3>
-          <p>A beginner calculator project using HTML, CSS and JavaScript.</p>
-        </article>
-
-        <article class="card project-card" data-search="snake game javascript">
-          <div class="project-icon">🐍</div>
-          <h3>Snake Game</h3>
-          <p>A simple practice game with mobile-friendly controls.</p>
-        </article>
-      </div>
+<section id="videos">
+  <h2>My Videos</h2>
+  <div class="card">
+    <h3>YouTube Video</h3>
+    <div style="position:relative;padding-bottom:56.25%;height:0">
+      <iframe src="https://www.youtube.com/embed/N96Vo0edsIc"
+        title="YouTube video" allowfullscreen
+        style="position:absolute;width:100%;height:100%;left:0;top:0;border:0;border-radius:12px">
+      </iframe>
     </div>
-  </section>
+    <p><a href="https://youtu.be/N96Vo0edsIc?si=z9fsjg8Ihabz0WlX"
+      target="_blank" style="color:var(--cyan)">Watch on YouTube</a></p>
+  </div>
+</section>
 
-  <section id="services">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-en="My Services" data-bn="আমার সার্ভিস">My Services</h2>
-        <p data-en="Sample service ideas — update as your skills grow" data-bn="নমুনা সার্ভিস — দক্ষতা বাড়লে আপডেট করবেন">
-          Sample service ideas — update as your skills grow
-        </p>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>🌐 Website Design</h3>
-          <p>Simple personal website design.</p>
-          <div class="price">Price on request</div>
-          <a class="btn" href="#contact">Ask about service</a>
-        </div>
-
-        <div class="card">
-          <h3>📱 Responsive Layout</h3>
-          <p>Layouts designed for mobile and desktop screens.</p>
-          <div class="price">Price on request</div>
-          <a class="btn" href="#contact">Ask about service</a>
-        </div>
-
-        <div class="card">
-          <h3>🎨 Website Styling</h3>
-          <p>Basic colors, sections and visual improvements.</p>
-          <div class="price">Price on request</div>
-          <a class="btn" href="#contact">Ask about service</a>
-        </div>
-      </div>
+<section id="calculator">
+  <h2>Calculator</h2>
+  <div class="calculator">
+    <input id="calcDisplay" placeholder="0" readonly>
+    <div class="calc-buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="deleteNumber()">←</button>
+      <button class="operator" onclick="press('%')">%</button>
+      <button class="operator" onclick="press('/')">÷</button>
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button class="operator" onclick="press('*')">×</button>
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button class="operator" onclick="press('-')">−</button>
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button class="operator" onclick="press('+')">+</button>
+      <button onclick="press('0')">0</button>
+      <button onclick="press('.')">.</button>
+      <button class="equal" style="grid-column:span 2" onclick="calculate()">=</button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="journey">
-    <div class="container">
-      <div class="section-title">
-        <h2>My Learning Journey</h2>
-        <p>Learning step by step</p>
-      </div>
-      <div class="grid">
-        <div class="card"><h3>📘 HTML</h3><p>Learning website structure.</p></div>
-        <div class="card"><h3>🎨 CSS</h3><p>Learning layouts and design.</p></div>
-        <div class="card"><h3>⚡ JavaScript</h3><p>Learning website interactions.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="reviews">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-en="Client Reviews" data-bn="ক্লায়েন্টদের মতামত">Client Reviews</h2>
-        <p data-en="Real feedback will appear here" data-bn="বাস্তব মতামত এখানে যুক্ত হবে">Real feedback will appear here</p>
-      </div>
-
-      <div class="review-note">
-        ⭐<br>
-        <strong data-en="No client reviews yet" data-bn="এখনো কোনো ক্লায়েন্ট রিভিউ নেই">No client reviews yet</strong>
-        <p data-en="Reviews will be added after receiving genuine feedback."
-           data-bn="বাস্তব ক্লায়েন্টদের মতামত পাওয়ার পর এখানে যুক্ত করা হবে।">
-          Reviews will be added after receiving genuine feedback.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="blog">
-    <div class="container">
-      <div class="section-title">
-        <h2>My Blog</h2>
-        <p>Notes from my learning journey</p>
-      </div>
-      <div class="grid">
-        <div class="card"><h3>📘 Why Learn HTML?</h3><p>HTML is the foundation of web pages.</p></div>
-        <div class="card"><h3>🎨 Learning CSS</h3><p>CSS helps make websites look beautiful.</p></div>
-        <div class="card"><h3>⚡ JavaScript Basics</h3><p>JavaScript adds interaction to websites.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="visitor">
-    <div class="container center card">
-      <h2 data-en="Your Visits on This Browser" data-bn="এই ব্রাউজারে আপনার ভিজিট">
-        Your Visits on This Browser
-      </h2>
-      <div class="counter" id="visitCount">0</div>
-      <p class="muted" data-en="This is a local browser counter, not a total visitor count."
-         data-bn="এটি শুধু এই ব্রাউজারের হিসাব, সব ভিজিটরের মোট সংখ্যা নয়।">
-        This is a local browser counter, not a total visitor count.
-      </p>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container contact-box">
-      <div class="section-title">
-        <h2 data-en="Contact Me" data-bn="যোগাযোগ করুন">Contact Me</h2>
-        <p data-en="Let's connect" data-bn="যোগাযোগ করা যাক">Let's connect</p>
-      </div>
-
-      <p data-en="For questions or project discussions, contact me through WhatsApp or GitHub."
-         data-bn="কোনো প্রশ্ন বা প্রজেক্ট নিয়ে কথা বলতে WhatsApp অথবা GitHub-এ যোগাযোগ করুন।">
-        For questions or project discussions, contact me through WhatsApp or GitHub.
-      </p>
-
-      <a class="btn" id="whatsappLink" href="#" target="_blank" rel="noopener">
-        💬 WhatsApp Me
+<section id="contact">
+  <h2>Contact Me</h2>
+  <div class="card">
+    <p style="text-align:center">Feel free to contact me.</p>
+    <div class="contact-links">
+      <a class="contact-link whatsapp" href="https://wa.me/8801760409946" target="_blank">
+        <svg viewBox="0 0 32 32">
+          <path d="M16 .8A15.1 15.1 0 0 0 3 23.6L.9 31l7.6-2A15.1 15.1 0 1 0 16 .8zm0 27.4c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4.5 1.2 1.2-4.4-.3-.5A12.4 12.4 0 1 1 16 28.2zm6.8-9.3c-.4-.2-2.1-1-2.5-1.1-.3-.1-.6-.2-.8.2-.3.4-.9 1.1-1.1 1.3-.2.2-.4.3-.8.1-.4-.2-1.5-.6-2.9-1.8-1.1-1-1.8-2.1-2-2.5-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.3-.6.1-.2 0-.5 0-.7-.1-.2-.8-1.9-1.1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.5.2-1.7-.1-.2-.3-.3-.7-.5z"/>
+        </svg>WhatsApp
       </a>
-
-      <a class="btn btn-outline" href="https://github.com/azimahamedr-del"
-         target="_blank" rel="noopener">💻 GitHub Profile</a>
+      <a class="contact-link telegram" href="https://t.me/azimahamedrafi" target="_blank">
+        <svg viewBox="0 0 24 24">
+          <path d="M21.9 3.2 18.6 20c-.2 1.2-.9 1.5-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6 13.6 1.1 12c-1.1-.3-1.1-1.1.2-1.6L20.4 3c.9-.3 1.7.2 1.5.2z"/>
+        </svg>Telegram
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 </main>
 
-<footer>
-  <p>© <span id="year"></span> Azim Ahmed Rafi. All Rights Reserved.</p>
-  <p>Made with ❤️ and learning</p>
-</footer>
-
-<button id="topBtn" aria-label="Back to top">↑</button>
-
-<a class="floating-whatsapp" id="floatingWhatsapp" href="#" target="_blank" rel="noopener">
-  💬 Chat
-</a>
+<footer>© 2026 MR RAFI. All Rights Reserved.</footer>
 
 <script>
-  // Your personal details
-  const MY_NAME = "Azim Ahmed Rafi";
-  const MY_WHATSAPP = "8801760409946";
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
 
-  // WhatsApp links
-  const whatsappURL = "https://api.whatsapp.com/send?phone=" + MY_WHATSAPP;
-
-  document.getElementById("whatsappLink").href = whatsappURL;
-  document.getElementById("floatingWhatsapp").href = whatsappURL;
-
-  // Current year
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Mobile menu
-  const menuBtn = document.getElementById("menuBtn");
-  const navLinks = document.getElementById("navLinks");
-
-  menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("show");
+/* MENU ACTIVE COLOR */
+const menuLinks=document.querySelectorAll("#mainNav a");
+menuLinks.forEach(link=>{
+  link.addEventListener("click",()=>{
+    menuLinks.forEach(item=>item.classList.remove("active"));
+    link.classList.add("active");
   });
-
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => navLinks.classList.remove("show"));
+});
+const pageSections=document.querySelectorAll("main section[id]");
+window.addEventListener("scroll",()=>{
+  let current="";
+  pageSections.forEach(section=>{
+    if(window.scrollY>=section.offsetTop-150) current=section.id;
   });
+  menuLinks.forEach(link=>{
+    link.classList.toggle("active",link.getAttribute("href")==="#"+current);
+  });
+});
 
-  // Dark and light mode
-  const themeBtn = document.getElementById("themeBtn");
+/* CALCULATOR */
+let calcValue="";
+const calcDisplay=document.getElementById("calcDisplay");
+function press(value){
+  if(calcValue==="Error")calcValue="";
+  calcValue+=value;
+  calcDisplay.value=calcValue;
+}
+function clearDisplay(){calcValue="";calcDisplay.value=""}
+function deleteNumber(){
+  calcValue=calcValue.slice(0,-1);
+  calcDisplay.value=calcValue;
+}
+function calculate(){
+  if(!calcValue)return;
+  if(!/^[0-9+\-*/%.() ]+$/.test(calcValue)){
+    calcValue="Error";calcDisplay.value=calcValue;return;
+  }
+  try{
+    const result=Function('"use strict";return ('+calcValue+')')();
+    if(!Number.isFinite(result))throw new Error("Invalid");
+    calcValue=String(Number(result.toFixed(8)));
+    calcDisplay.value=calcValue;
+  }catch(error){
+    calcValue="Error";calcDisplay.value="Error";
+  }
+}
 
-  if (localStorage.getItem("rafi-theme") === "light") {
-    document.body.classList.add("light");
-    themeBtn.textContent = "🌙";
+/* SQUARE SNAKE GAME */
+const canvas=document.getElementById("snakeCanvas");
+const ctx=canvas.getContext("2d");
+const scoreEl=document.getElementById("snakeScore");
+const statusEl=document.getElementById("snakeStatus");
+const message=document.getElementById("gameMessage");
+
+const CELL=20;
+const GRID=21;
+let snake=[];
+let food={x:15,y:10};
+let direction="right";
+let nextDirection="right";
+let eaten=0;
+let running=false;
+let timer=null;
+
+function drawBoard(){
+  ctx.fillStyle="#102a37";
+  ctx.fillRect(0,0,420,420);
+
+  ctx.strokeStyle="#244554";
+  ctx.lineWidth=1;
+  for(let i=0;i<=GRID;i++){
+    ctx.beginPath();
+    ctx.moveTo(i*CELL,0);
+    ctx.lineTo(i*CELL,420);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0,i*CELL);
+    ctx.lineTo(420,i*CELL);
+    ctx.stroke();
   }
 
-  themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-    const isLight = document.body.classList.contains("light");
-    localStorage.setItem("rafi-theme", isLight ? "light" : "dark");
-    themeBtn.textContent = isLight ? "🌙" : "☀️";
+  ctx.strokeStyle="#64e7ff";
+  ctx.lineWidth=5;
+  ctx.strokeRect(2,2,416,416);
+}
+
+function drawFood(){
+  ctx.fillStyle="#ffcf35";
+  ctx.beginPath();
+  ctx.arc(food.x*CELL+10,food.y*CELL+10,8,0,Math.PI*2);
+  ctx.fill();
+  ctx.fillStyle="#fff2a8";
+  ctx.beginPath();
+  ctx.arc(food.x*CELL+7,food.y*CELL+7,3,0,Math.PI*2);
+  ctx.fill();
+}
+
+function drawSnake(){
+  snake.forEach((part,index)=>{
+    ctx.fillStyle=index===0?"#a5ff63":"#35d875";
+    ctx.beginPath();
+    ctx.roundRect(part.x*CELL+2,part.y*CELL+2,16,16,5);
+    ctx.fill();
+
+    if(index===0){
+      ctx.fillStyle="#10251a";
+      ctx.beginPath();
+      ctx.arc(part.x*CELL+6,part.y*CELL+7,2,0,Math.PI*2);
+      ctx.arc(part.x*CELL+14,part.y*CELL+7,2,0,Math.PI*2);
+      ctx.fill();
+    }
   });
+}
 
-  // Bengali and English language
-  let currentLang = "en";
-  const langBtn = document.getElementById("langBtn");
+function drawGame(){
+  drawBoard();
+  drawFood();
+  drawSnake();
+}
 
-  langBtn.addEventListener("click", () => {
-    currentLang = currentLang === "en" ? "bn" : "en";
+function placeFood(){
+  let point;
+  do{
+    point={x:Math.floor(Math.random()*GRID),y:Math.floor(Math.random()*GRID)};
+  }while(snake.some(part=>part.x===point.x&&part.y===point.y));
+  food=point;
+}
 
-    document.querySelectorAll("[data-en]").forEach(element => {
-      element.textContent = element.dataset[currentLang];
-    });
+function startSnake(){
+  clearInterval(timer);
+  snake=[
+    {x:5,y:10},
+    {x:4,y:10},
+    {x:3,y:10},
+    {x:2,y:10}
+  ];
+  direction="right";
+  nextDirection="right";
+  eaten=0;
+  running=true;
+  placeFood();
+  scoreEl.textContent="0 / 10";
+  statusEl.textContent="Playing";
+  message.textContent="খাবারের বল খাও!";
+  drawGame();
+  timer=setInterval(moveSnake,140);
+}
 
-    document.documentElement.lang = currentLang;
-    langBtn.textContent = currentLang === "en" ? "বাংলা" : "English";
-  });
+function changeDirection(newDirection){
+  if(!running)return;
+  const opposite={up:"down",down:"up",left:"right",right:"left"};
+  if(opposite[direction]!==newDirection)nextDirection=newDirection;
+}
 
-  // Project search
-  const projectSearch = document.getElementById("projectSearch");
+function moveSnake(){
+  direction=nextDirection;
+  const head={...snake[0]};
 
-  projectSearch.addEventListener("input", () => {
-    const query = projectSearch.value.toLowerCase();
+  if(direction==="up")head.y--;
+  if(direction==="down")head.y++;
+  if(direction==="left")head.x--;
+  if(direction==="right")head.x++;
 
-    document.querySelectorAll(".project-card").forEach(card => {
-      const content = card.innerText.toLowerCase() + " " + card.dataset.search;
-      card.classList.toggle("hidden", !content.includes(query));
-    });
-  });
-
-  // Back to top
-  const topBtn = document.getElementById("topBtn");
-
-  window.addEventListener("scroll", () => {
-    topBtn.style.display = window.scrollY > 350 ? "block" : "none";
-  });
-
-  topBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // Browser-local visit counter
-  let visits = Number(localStorage.getItem("rafi-visits") || 0);
-  visits++;
-  localStorage.setItem("rafi-visits", visits);
-  document.getElementById("visitCount").textContent = visits;
-
-  // Download a starter CV text file
-  function downloadCV() {
-    const cvText =
-      "CURRICULUM VITAE\n\n" +
-      "Name: " + MY_NAME + "\n" +
-      "Location: Bangladesh\n" +
-      "Profile: Web Development Student\n\n" +
-      "Skills:\nHTML - Learning\nCSS - Learning\nJavaScript - Learning\n\n" +
-      "Projects:\nPersonal Portfolio\nCalculator Practice Project\nSnake Game Practice Project\n\n" +
-      "Please update this CV with your real education, contact details and experience.";
-
-    const file = new Blob([cvText], { type: "text/plain" });
-    const url = URL.createObjectURL(file);
-    const link = document.createElement("a");
-
-    link.href = url;
-    link.download = "Azim-Ahmed-Rafi-CV.txt";
-    link.click();
-
-    URL.revokeObjectURL(url);
+  if(head.x<0||head.x>=GRID||head.y<0||head.y>=GRID){
+    endGame(false);return;
   }
+
+  const eating=head.x===food.x&&head.y===food.y;
+  const body=eating?snake:snake.slice(0,-1);
+
+  if(body.some(part=>part.x===head.x&&part.y===head.y)){
+    endGame(false);return;
+  }
+
+  snake.unshift(head);
+
+  if(eating){
+    eaten++;
+    scoreEl.textContent=eaten+" / 10";
+    if(eaten>=10){endGame(true);return}
+    placeFood();
+  }else{
+    snake.pop();
+  }
+  drawGame();
+}
+
+function endGame(won){
+  running=false;
+  clearInterval(timer);
+  statusEl.textContent=won?"Won!":"Game Over";
+  message.textContent=won
+    ?"🎉 অভিনন্দন! তুমি গেম জিতেছ!"
+    :"খেলা শেষ! আবার START চাপ দিয়ে খেলো।";
+  drawGame();
+}
+
+document.addEventListener("keydown",event=>{
+  const keys={
+    ArrowUp:"up",ArrowDown:"down",
+    ArrowLeft:"left",ArrowRight:"right"
+  };
+  if(keys[event.key]){
+    event.preventDefault();
+    changeDirection(keys[event.key]);
+  }
+});
+
+drawBoard();
 </script>
-
 </body>
-        </html>
+</html>
